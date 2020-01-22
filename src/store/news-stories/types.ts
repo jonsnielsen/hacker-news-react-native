@@ -2,8 +2,9 @@
  * Action types
  */
 export enum NewsStoriesActionTypes {
-  FETCH_TOP_TEN = "@newsStories/FETCH_TOP_TEN",
-  FETCH_ALL = "@newsStories/FETCH_ALL"
+  LOAD_TOP_TEN_REQUEST = "@newsStories/LOAD_TOP_TEN_REQUEST",
+  LOAD_TOP_TEN_SUCCESS = "@newsStories/LOAD_TOP_TEN_SUCCESS",
+  LOAD_TOP_TEN_FAILURE = "@newsStories/LOAD_TOP_TEN_FALUIRE"
 }
 
 /**
@@ -25,5 +26,7 @@ export interface NewsStory {
  * State types
  */
 export interface NewsStoriesState {
-  posts: NewsStory[];
+  data: NewsStory[];
+  error: boolean;
+  loading: boolean;
 }

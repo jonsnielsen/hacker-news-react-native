@@ -1,36 +1,20 @@
-import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
-// import Api from "...";
+import { call, all, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { fetchTopNewsStories, fetchNewsStory } from "../../data/newsStories";
+import { loadTopTenSuccess, loadTopTenFailure } from "./actions";
+import _ from "lodash";
 
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
-// function* fetchUser(action) {
-//   try {
-//     const user = yield call(Api.fetchUser, action.payload.userId);
-//     yield put({ type: "USER_FETCH_SUCCEEDED", user: user });
-//   } catch (e) {
-//     yield put({ type: "USER_FETCH_FAILED", message: e.message });
-//   }
-// }
-
-/*
-  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
-  Allows concurrent fetches of user.
-*/
-// function* mySaga() {
-//   yield takeEvery("USER_FETCH_REQUESTED", fetchUser);
-// }
-export function* helloSaga() {
-  console.log("Hello Sagas!");
+export function* fetchTopTenStories() {
+  try {
+    const response = yield call(fetchTopNewsStories);
+    const tenRandomIds = _.sampleSize(response.data, 10);
+    const topTenNewsStoriesResponse = yield all(
+      tenRandomIds.map(id => call(fetchNewsStory, { id }))
+    );
+    const topTenNewsStories = topTenNewsStoriesResponse.map(res => res.data);
+    yield put(loadTopTenSuccess(topTenNewsStories));
+  } catch (err) {
+    console.log("error");
+    console.log(err);
+    yield put(loadTopTenFailure());
+  }
 }
-
-/*
-  Alternatively you may use takeLatest.
-
-  Does not allow concurrent fetches of user. If "USER_FETCH_REQUESTED" gets
-  dispatched while a fetch is already pending, that pending fetch is cancelled
-  and only the latest one will be run.
-*/
-// function* mySaga() {
-//   yield takeLatest("USER_FETCH_REQUESTED", fetchUser);
-// }
-
-export default helloSaga;

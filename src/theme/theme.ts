@@ -1,13 +1,40 @@
-// import { DefaultTheme, ThemeContext } from "styled-components";
-import baseStyled, { ThemedStyledInterface } from "styled-components";
+import "styled-components/native";
+import { DefaultTheme } from "styled-components/native";
 
-export const defaultTheme = {
+declare module "styled-components" {
+  export interface DefaultTheme {
+    palette: {
+      primary: string;
+      background: string;
+      backgroundAccent: string;
+    };
+    fontFamily: {
+      primary: {
+        regular: string;
+        medium: string;
+        bold: string;
+      };
+      secondary: {
+        regular: string;
+      };
+    };
+    fontSize: {
+      tiny: string;
+      body2: string;
+      body1: string;
+      h2: string;
+      h1: string;
+    };
+  }
+}
+
+export const theme: DefaultTheme = {
   palette: {
     primary: "#E3566B",
     background: "#fff",
     backgroundAccent: "#F8F7F9"
   },
-  font: {
+  fontFamily: {
     primary: {
       regular: "roboto",
       medium: "roboto-medium",
@@ -16,17 +43,12 @@ export const defaultTheme = {
     secondary: {
       regular: "roboto-mono"
     }
+  },
+  fontSize: {
+    tiny: "13px",
+    body2: "14px",
+    body1: "19px",
+    h2: "19px",
+    h1: "38px"
   }
 };
-
-export const darkTheme: typeof defaultTheme = {
-  ...defaultTheme,
-  palette: {
-    primary: "#E3566B",
-    background: "#26262B",
-    backgroundAccent: "#1C1C20"
-  }
-};
-
-export type Theme = typeof defaultTheme;
-export const styled = baseStyled as ThemedStyledInterface<Theme>;

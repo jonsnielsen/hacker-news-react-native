@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
-import Layout from "./src/components/layout";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import Navigator from "./src/navigation/Navigator";
 import { ThemeProvider } from "styled-components";
-import { defaultTheme, darkTheme } from "./src/theme/theme";
+import { theme } from "./src/theme/theme";
 import { createStore, applyMiddleware } from "redux";
 import { Provider as ReduxProvider } from "react-redux";
 import { rootReducer, rootSaga } from "./src/store";
@@ -38,18 +36,9 @@ export default function App() {
 
   return (
     <ReduxProvider store={store}>
-      <ThemeProvider theme={defaultTheme}>
+      <ThemeProvider theme={theme}>
         <Navigator />
       </ThemeProvider>
     </ReduxProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});

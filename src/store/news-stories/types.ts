@@ -1,3 +1,4 @@
+import { NewsStory } from "../../types/NewsStory";
 /**
  * Action types
  */
@@ -8,25 +9,10 @@ export enum NewsStoriesActionTypes {
 }
 
 /**
- * Data types
- */
-export interface NewsStory {
-  by: string;
-  descendants: number;
-  id: number;
-  kids: number[];
-  score: number;
-  time: number;
-  title: string;
-  type: string;
-  url: string;
-}
-
-/**
  * State types
  */
 export interface NewsStoriesState {
-  data: NewsStory[];
+  newsStories: NewsStory[];
   error: boolean;
   loading: boolean;
 }

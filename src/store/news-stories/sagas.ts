@@ -1,16 +1,31 @@
-import { call, all, put, takeEvery, takeLatest } from "redux-saga/effects";
-import { fetchTopNewsStories, fetchNewsStory } from "../../data/newsStories";
+// import { call, all, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { call, all, put } from "typed-redux-saga";
+import { fetchTopNewsStoriesIds, fetchNewsStory } from "../../API/newsStories";
+import { fetchAuthor } from "../../API/authors";
+import { NewsStory } from "../../types/NewsStory";
 import { loadTopTenSuccess, loadTopTenFailure } from "./actions";
 import _ from "lodash";
+import { simplifyUrl } from "../../utils/text";
 
 export function* fetchTopTenStories() {
   try {
-    const response = yield call(fetchTopNewsStories);
-    const tenRandomIds = _.sampleSize(response.data, 10);
-    const topTenNewsStoriesResponse = yield all(
+    const topNewsStoriesIds = yield* call(fetchTopNewsStoriesIds);
+    const tenRandomIds = _.sampleSize(topNewsStoriesIds, 10);
+    const topTenNewsStoriesDTOs = yield* all(
       tenRandomIds.map(id => call(fetchNewsStory, { id }))
     );
-    const topTenNewsStories = topTenNewsStoriesResponse.map(res => res.data);
+    const topTenNewsStories = yield* all(
+      topTenNewsStoriesDTOs.map(dto =>
+        fetchAuthor({ id: dto.by }).then(
+          (author): NewsStory => ({
+            ...dto,
+            simplifiedUrl: simplifyUrl(dto.url),
+            author
+          })
+        )
+      )
+    );
+
     yield put(loadTopTenSuccess(topTenNewsStories));
   } catch (err) {
     console.log("error");

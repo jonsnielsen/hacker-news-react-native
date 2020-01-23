@@ -2,7 +2,7 @@ import { Reducer } from "redux";
 import { NewsStoriesActionTypes, NewsStoriesState } from "./types";
 
 export const initialState: NewsStoriesState = {
-  data: [],
+  newsStories: [],
   error: false,
   loading: false
 };
@@ -14,7 +14,7 @@ const reducer: Reducer<NewsStoriesState> = (state = initialState, action) => {
     case NewsStoriesActionTypes.LOAD_TOP_TEN_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        newsStories: action.payload,
         loading: false,
         error: false
       };

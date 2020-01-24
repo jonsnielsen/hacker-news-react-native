@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components/native";
-import { FlatList, Text } from "react-native";
+import { FlatList, Text, Switch } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../store";
@@ -12,6 +12,7 @@ import ActivityIndicator from "../../components/ActivityIndicator";
 import NewsStory from "./NewsStory";
 import { NavigationStackScreenComponent } from "react-navigation-stack";
 import Layout from "../../components/layout";
+import { useToggleTheme } from "../../theme/ToggleTheme";
 
 interface IProps extends NavigationInjectedProps {}
 
@@ -21,6 +22,7 @@ const HomeScreen: NavigationStackScreenComponent<IProps> = ({ navigation }) => {
     AppState,
     NewsStoriesState
   >((state: AppState) => state.hackerNews);
+  const { isLightTheme, toggleTheme } = useToggleTheme();
 
   useEffect(() => {
     dispatch({ type: NewsStoriesActionTypes.LOAD_TOP_TEN_REQUEST });
@@ -40,6 +42,7 @@ const HomeScreen: NavigationStackScreenComponent<IProps> = ({ navigation }) => {
   return (
     <Layout>
       <STitle>Hacker News</STitle>
+      <Switch onValueChange={toggleTheme} value={!isLightTheme} />
       <FlatList
         data={newsStories}
         keyExtractor={item => item.id.toString()}

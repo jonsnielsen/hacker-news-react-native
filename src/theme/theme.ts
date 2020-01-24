@@ -28,7 +28,7 @@ declare module "styled-components" {
   }
 }
 
-export const theme: DefaultTheme = {
+export const lightTheme: DefaultTheme = {
   palette: {
     primary: "#E3566B",
     background: "#fff",
@@ -50,5 +50,14 @@ export const theme: DefaultTheme = {
     body1: "19px",
     h2: "19px",
     h1: "38px"
+  }
+};
+
+export const darkTheme: DefaultTheme = {
+  ...lightTheme,
+  palette: {
+    primary: "#E3566B",
+    background: "#31313D",
+    backgroundAccent: "#1C1C20"
   }
 };

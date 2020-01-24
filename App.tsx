@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import Navigator from "./src/navigation/Navigator";
 import { ThemeProvider } from "styled-components";
-import { theme } from "./src/theme/theme";
+import { lightTheme, darkTheme } from "./src/theme/theme";
 import { createStore, applyMiddleware } from "redux";
 import { Provider as ReduxProvider } from "react-redux";
 import { rootReducer, rootSaga } from "./src/store";
 import createSagaMiddleware from "redux-saga";
+import { ToggleThemeContext } from "./src/theme/ToggleTheme";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
@@ -24,6 +25,7 @@ const fetchFonts = () => {
 
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [isLightTheme, setIsLightTheme] = useState(true);
 
   if (!dataLoaded) {
     return (
@@ -36,8 +38,15 @@ export default function App() {
 
   return (
     <ReduxProvider store={store}>
-      <ThemeProvider theme={theme}>
-        <Navigator />
+      <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
+        <ToggleThemeContext.Provider
+          value={{
+            isLightTheme,
+            toggleTheme: () => setIsLightTheme(prev => !prev)
+          }}
+        >
+          <Navigator />
+        </ToggleThemeContext.Provider>
       </ThemeProvider>
     </ReduxProvider>
   );

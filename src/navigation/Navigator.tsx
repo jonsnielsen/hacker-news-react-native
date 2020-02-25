@@ -1,5 +1,3 @@
-// import { createAppContainer } from "react-navigation";
-// import { createStackNavigator } from "react-navigation-stack";
 import React from "react";
 import { HomeScreen } from "../screens";
 import DrawerContent from "./drawer";
@@ -8,18 +6,6 @@ import StackNavigator from "./StackNavigator";
 
 const Drawer = createDrawerNavigator();
 
-// const AppNavigator = createStackNavigator(
-//   {
-//     Home: { screen: HomeScreen }
-//   },
-//   {
-//     defaultNavigationOptions: {
-//       headerStyle: {
-//         backgroundColor: "#F8F7F9"
-//       }
-//     }
-//   }
-// );
 
 const RootNavigator = () => {
   return (

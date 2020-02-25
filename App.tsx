@@ -40,20 +40,22 @@ export default function App() {
 
   return (
     <ReduxProvider store={store}>
-      <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
-        <ToggleThemeContext.Provider
-          value={{
-            isLightTheme,
-            toggleTheme: () => setIsLightTheme(prev => !prev)
-          }}
-        >
-          <PaperProvider>
-            <NavigationContainer>
-              <Navigator />
-            </NavigationContainer>
-          </PaperProvider>
-        </ToggleThemeContext.Provider>
-      </ThemeProvider>
+      {/* <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}> */}
+      <ToggleThemeContext.Provider
+        value={{
+          isLightTheme,
+          toggleTheme: () => setIsLightTheme(prev => !prev)
+        }}
+      >
+        <PaperProvider theme={
+          isLightTheme ? lightTheme : darkTheme
+        }>
+          <NavigationContainer>
+            <Navigator />
+          </NavigationContainer>
+        </PaperProvider>
+      </ToggleThemeContext.Provider>
+      {/* </ThemeProvider> */}
     </ReduxProvider>
   );
 }

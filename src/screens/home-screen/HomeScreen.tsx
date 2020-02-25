@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components/native";
-import { FlatList, Text, Switch } from "react-native";
+import { FlatList  } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../store";
@@ -8,7 +8,7 @@ import {
   NewsStoriesState,
   NewsStoriesActionTypes
 } from "../../store/news-stories/types";
-import ActivityIndicator from "../../components/ActivityIndicator";
+import { ActivityIndicator,Title } from 'react-native-paper';
 import NewsStory from "./news-story";
 import Layout from "../../components/layout";
 import { useToggleTheme } from "../../theme/ToggleTheme";
@@ -32,9 +32,7 @@ const HomeScreen: React.FC<IProps> = ({ navigation }) => {
 
   if (loading) {
     return (
-      <SActivityIndicatorWrapper>
-        <ActivityIndicator size="large" />
-      </SActivityIndicatorWrapper>
+      <ActivityIndicator animating={true} />
     );
   }
 
@@ -50,7 +48,8 @@ const HomeScreen: React.FC<IProps> = ({ navigation }) => {
   }));
   return (
     <Layout>
-      <STitle>Hacker News</STitle>
+      {/* <STitle>Hacker News</STitle> */}
+      <Title>Hacker News</Title>
       <Switch onValueChange={toggleTheme} value={!isLightTheme} />
       <FlatList
         data={data}
@@ -61,20 +60,16 @@ const HomeScreen: React.FC<IProps> = ({ navigation }) => {
   );
 };
 
-const SActivityIndicatorWrapper = styled.View`
-  flex: 1;
-  justify-content: center;
-`;
 
-const STitle = styled.Text`
-  ${({ theme }) => `
-    color: ${theme.palette.primary};
-    font-size:  ${theme.fontSize.h1};
-    font-family: ${theme.fontFamily.primary.bold}
-  `}
-  text-align: left;
-  align-self: flex-start;
-  margin-vertical: 30px;
-`;
+// const STitle = styled.Text`
+//   ${({ theme }) => `
+//     color: ${theme.palette.primary};
+//     font-size:  ${theme.fontSize.h1};
+//     font-family: ${theme.fontFamily.primary.bold}
+//   `}
+//   text-align: left;
+//   align-self: flex-start;
+//   margin-vertical: 30px;
+// `;
 
 export default HomeScreen;

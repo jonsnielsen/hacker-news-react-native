@@ -8,27 +8,26 @@ import {
 import styled from "styled-components/native";
 import IconValuePair from "../../../components/IconValuePair";
 import { FontAwesome } from "@expo/vector-icons";
+import { INewsStory } from "../../../types/NewsStory";
 
 interface IProps {
-  url: string;
-  simplifiedUrl: string;
-  title: string;
-  author: string;
-  karma: number;
-  score: number;
+  newsStory: INewsStory;
+  onPress(): void;
 }
 
 const NewsStory: React.FC<IProps> = ({
-  url,
-  simplifiedUrl,
-  title,
-  author,
-  karma,
-  score
+  onPress,
+  newsStory: {
+    url,
+    simplifiedUrl,
+    title,
+    author: { karma, id: authorId },
+    score
+  }
 }) => {
   return (
     <SContainer>
-      <TouchableWithoutFeedback onPress={() => Linking.openURL(url)}>
+      <TouchableWithoutFeedback onPress={onPress}>
         <View>
           <SUrl>{simplifiedUrl}</SUrl>
           <STitle>{title}</STitle>
@@ -36,7 +35,7 @@ const NewsStory: React.FC<IProps> = ({
       </TouchableWithoutFeedback>
       <SInfoBar>
         <IconValuePair icon={<FontAwesome name="star" />} value={score} />
-        <SAuthor>by: {author}</SAuthor>
+        <SAuthor>by: {authorId}</SAuthor>
         <IconValuePair icon={<FontAwesome name="heart" />} value={karma} />
       </SInfoBar>
     </SContainer>

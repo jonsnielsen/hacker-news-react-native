@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components/native";
 import { FlatList, Text, Switch } from "react-native";
-import { NavigationInjectedProps } from "react-navigation";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../store";
 import {
@@ -9,14 +9,16 @@ import {
   NewsStoriesActionTypes
 } from "../../store/news-stories/types";
 import ActivityIndicator from "../../components/ActivityIndicator";
-import NewsStory from "./NewsStory";
-import { NavigationStackScreenComponent } from "react-navigation-stack";
+import NewsStory from "./news-story";
 import Layout from "../../components/layout";
 import { useToggleTheme } from "../../theme/ToggleTheme";
+import { StackNavigatorParamlist } from "../../types/NavigationTypes";
 
-interface IProps extends NavigationInjectedProps {}
+interface IProps {
+  navigation?: StackNavigationProp<StackNavigatorParamlist>;
+}
 
-const HomeScreen: NavigationStackScreenComponent<IProps> = ({ navigation }) => {
+const HomeScreen: React.FC<IProps> = ({ navigation }) => {
   const dispatch = useDispatch();
   const { newsStories, loading, error } = useSelector<
     AppState,
@@ -39,26 +41,21 @@ const HomeScreen: NavigationStackScreenComponent<IProps> = ({ navigation }) => {
   if (error) {
     return <Text>An Error has ocurred!</Text>;
   }
+
+  const data = newsStories.map(newsStory => ({
+    newsStory,
+    onPress: () => {
+      navigation?.push("NewsStory", newsStory);
+    }
+  }));
   return (
     <Layout>
       <STitle>Hacker News</STitle>
       <Switch onValueChange={toggleTheme} value={!isLightTheme} />
       <FlatList
-        data={newsStories}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({ item: newsStory }) => (
-          <NewsStory
-            title={newsStory.title}
-            author={newsStory.author.id}
-            simplifiedUrl={newsStory.simplifiedUrl}
-            url={newsStory.url}
-            key={newsStory.id}
-            score={newsStory.score}
-            karma={newsStory.author.karma}
-          >
-            {newsStory.url}
-          </NewsStory>
-        )}
+        data={data}
+        keyExtractor={item => item.newsStory.author.id.toString()}
+        renderItem={({ item }) => <NewsStory {...item} />}
       />
     </Layout>
   );

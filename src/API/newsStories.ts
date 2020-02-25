@@ -1,5 +1,5 @@
 import API from "./API";
-import { NewsStoryDTO } from "../types/NewsStory";
+import { INewsStoryDTO } from "../types/NewsStory";
 
 export const fetchTopNewsStoriesIds = async () => {
   const response = await API.get<number[]>("topstories.json");
@@ -10,6 +10,6 @@ interface IFetchNewsStory {
   id: number;
 }
 export const fetchNewsStory = async ({ id }: IFetchNewsStory) => {
-  const response = await API.get<NewsStoryDTO>(`item/${id}.json`);
+  const response = await API.get<INewsStoryDTO>(`item/${id}.json`);
   return response.data;
 };

@@ -1,5 +1,5 @@
 import { Author } from "./Author";
-export interface NewsStoryDTO {
+export interface INewsStoryDTO {
   by: string;
   descendants: number;
   id: number;
@@ -11,7 +11,7 @@ export interface NewsStoryDTO {
   url: string;
 }
 
-export interface NewsStory {
+export interface INewsStory {
   author: Author;
   id: number;
   kids: number[];

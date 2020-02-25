@@ -9,6 +9,8 @@ import { Provider as ReduxProvider } from "react-redux";
 import { rootReducer, rootSaga } from "./src/store";
 import createSagaMiddleware from "redux-saga";
 import { ToggleThemeContext } from "./src/theme/ToggleTheme";
+import { Provider as PaperProvider } from "react-native-paper";
+import { NavigationContainer } from "@react-navigation/native";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
@@ -45,7 +47,11 @@ export default function App() {
             toggleTheme: () => setIsLightTheme(prev => !prev)
           }}
         >
-          <Navigator />
+          <PaperProvider>
+            <NavigationContainer>
+              <Navigator />
+            </NavigationContainer>
+          </PaperProvider>
         </ToggleThemeContext.Provider>
       </ThemeProvider>
     </ReduxProvider>

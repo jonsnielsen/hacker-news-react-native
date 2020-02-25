@@ -2,7 +2,7 @@
 import { call, all, put } from "typed-redux-saga";
 import { fetchTopNewsStoriesIds, fetchNewsStory } from "../../API/newsStories";
 import { fetchAuthor } from "../../API/authors";
-import { NewsStory } from "../../types/NewsStory";
+import { INewsStory } from "../../types/NewsStory";
 import { loadTopTenSuccess, loadTopTenFailure } from "./actions";
 import _ from "lodash";
 import { simplifyUrl } from "../../utils/text";
@@ -17,7 +17,7 @@ export function* fetchTopTenStories() {
     const topTenNewsStories = yield* all(
       topTenNewsStoriesDTOs.map(dto =>
         fetchAuthor({ id: dto.by }).then(
-          (author): NewsStory => ({
+          (author): INewsStory => ({
             ...dto,
             simplifiedUrl: simplifyUrl(dto.url),
             author

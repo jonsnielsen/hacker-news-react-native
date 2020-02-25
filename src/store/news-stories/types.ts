@@ -1,4 +1,4 @@
-import { NewsStory } from "../../types/NewsStory";
+import { INewsStory } from "../../types/NewsStory";
 /**
  * Action types
  */
@@ -12,7 +12,7 @@ export enum NewsStoriesActionTypes {
  * State types
  */
 export interface NewsStoriesState {
-  newsStories: NewsStory[];
+  newsStories: INewsStory[];
   error: boolean;
   loading: boolean;
 }

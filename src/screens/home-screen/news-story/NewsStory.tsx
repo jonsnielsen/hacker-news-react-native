@@ -5,15 +5,17 @@ import {
   Linking,
   TouchableWithoutFeedback
 } from "react-native";
-import styled from "styled-components/native";
 import IconValuePair from "../../../components/IconValuePair";
 import { FontAwesome } from "@expo/vector-icons";
 import { INewsStory } from "../../../types/NewsStory";
 import {
-  Title, Caption, Text, useTheme,
+  Title,
+  Caption,
+  Text,
+  useTheme,
   TouchableRipple
-} from 'react-native-paper'
-import color from 'color'
+} from "react-native-paper";
+import color from "color";
 
 interface IProps {
   newsStory: INewsStory;
@@ -47,12 +49,11 @@ const NewsStory: React.FC<IProps> = ({
     .rgb()
     .string();
   return (
-
     <View style={styles.topRow}>
       <Text>{simplifiedUrl}</Text>
       <Title>{title}</Title>
       <Caption style={styles.handle}>{authorId}</Caption>
-      <Caption style={[styles.handle, styles.dot]}>{'\u2B24'}</Caption>
+      <Caption style={[styles.handle, styles.dot]}>{"\u2B24"}</Caption>
     </View>
     // <SContainer>
     //   <TouchableWithoutFeedback onPress={onPress}>
@@ -98,52 +99,50 @@ const NewsStory: React.FC<IProps> = ({
 //   margin-horizontal: 20px;
 // `;
 
-
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingTop: 15,
-    paddingRight: 15,
+    paddingRight: 15
   },
   leftColumn: {
     width: 100,
-    alignItems: 'center',
+    alignItems: "center"
   },
   rightColumn: {
-    flex: 1,
+    flex: 1
   },
   topRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
+    flexDirection: "row",
+    alignItems: "baseline"
   },
   handle: {
-    marginRight: 3,
+    marginRight: 3
   },
   dot: {
-    fontSize: 3,
+    fontSize: 3
   },
   image: {
     borderWidth: StyleSheet.hairlineWidth,
     marginTop: 10,
     borderRadius: 20,
-    width: '100%',
-    height: 150,
+    width: "100%",
+    height: 150
   },
   bottomRow: {
     paddingVertical: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
   },
   iconContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center"
   },
   iconDescription: {
     marginLeft: 2,
-    lineHeight: 12,
-  },
+    lineHeight: 12
+  }
 });
-
 
 export default NewsStory;

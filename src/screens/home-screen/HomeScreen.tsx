@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import styled from "styled-components/native";
-import { FlatList  } from "react-native";
+import { FlatList, View } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../store";
@@ -8,9 +7,9 @@ import {
   NewsStoriesState,
   NewsStoriesActionTypes
 } from "../../store/news-stories/types";
-import { ActivityIndicator,Title } from 'react-native-paper';
+import { ActivityIndicator, Title, Text, Switch } from "react-native-paper";
 import NewsStory from "./news-story";
-import Layout from "../../components/layout";
+// import Layout from "../../components/layout";
 import { useToggleTheme } from "../../theme/ToggleTheme";
 import { StackNavigatorParamlist } from "../../types/NavigationTypes";
 
@@ -31,9 +30,7 @@ const HomeScreen: React.FC<IProps> = ({ navigation }) => {
   }, []);
 
   if (loading) {
-    return (
-      <ActivityIndicator animating={true} />
-    );
+    return <ActivityIndicator animating={true} />;
   }
 
   if (error) {
@@ -47,7 +44,7 @@ const HomeScreen: React.FC<IProps> = ({ navigation }) => {
     }
   }));
   return (
-    <Layout>
+    <View>
       {/* <STitle>Hacker News</STitle> */}
       <Title>Hacker News</Title>
       <Switch onValueChange={toggleTheme} value={!isLightTheme} />
@@ -56,10 +53,9 @@ const HomeScreen: React.FC<IProps> = ({ navigation }) => {
         keyExtractor={item => item.newsStory.author.id.toString()}
         renderItem={({ item }) => <NewsStory {...item} />}
       />
-    </Layout>
+    </View>
   );
 };
-
 
 // const STitle = styled.Text`
 //   ${({ theme }) => `

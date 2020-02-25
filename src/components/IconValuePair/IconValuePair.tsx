@@ -1,5 +1,6 @@
 import React from "react";
-import styled from "styled-components/native";
+import { StyleSheet, View } from "react-native";
+import { Text } from "react-native-paper";
 
 interface IProps {
   icon: any;
@@ -8,10 +9,10 @@ interface IProps {
 
 const IconValuePair: React.FC<IProps> = ({ icon, value }) => {
   return (
-    <SWrapper>
+    <View style={styles.wrapper}>
       {icon}
-      <SValue>{value}</SValue>
-    </SWrapper>
+      <Text>{value}</Text>
+    </View>
   );
 };
 
@@ -37,17 +38,21 @@ const IconValuePair: React.FC<IProps> = ({ icon, value }) => {
 //   lineHeight: 14
 // },
 
-const SWrapper = styled.View`
-  flex-direction: row;
-  align-items: center;
-  align-self: flex-start;
-`;
-const SValue = styled.Text`
-  margin-left: 7px;
-  ${({ theme }) => `
-    font-family: ${theme.fontFamily.secondary.regular} 
-    font-size: ${theme.fontSize.tiny}
-  `}
-`;
+// const SWrapper = styled.View``;
+// const SValue = styled.Text`
+//   margin-left: 7px;
+//   ${({ theme }) => `
+//     font-family: ${theme.fontFamily.secondary.regular}
+//     font-size: ${theme.fontSize.tiny}
+//   `}
+// `;
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "flex-start"
+  }
+});
 
 export default IconValuePair;

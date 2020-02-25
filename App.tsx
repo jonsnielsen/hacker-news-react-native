@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import Navigator from "./src/navigation/Navigator";
-import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./src/theme/theme";
 import { createStore, applyMiddleware } from "redux";
 import { Provider as ReduxProvider } from "react-redux";
@@ -47,9 +46,7 @@ export default function App() {
           toggleTheme: () => setIsLightTheme(prev => !prev)
         }}
       >
-        <PaperProvider theme={
-          isLightTheme ? lightTheme : darkTheme
-        }>
+        <PaperProvider theme={isLightTheme ? lightTheme : darkTheme}>
           <NavigationContainer>
             <Navigator />
           </NavigationContainer>

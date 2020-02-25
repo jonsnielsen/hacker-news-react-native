@@ -1,15 +1,12 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { Appbar, Avatar, Button } from "react-native-paper";
+import { Appbar, Avatar, Button, useTheme } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { StackHeaderProps } from "@react-navigation/stack";
 
-interface IHeader {
-  scene: any;
-  previous: any;
-  navigation: any;
-}
-
+interface IHeader extends StackHeaderProps {}
 const Header: React.FC<IHeader> = ({ scene, previous, navigation }) => {
+  const theme = useTheme();
   const { options } = scene.descriptor;
   const title =
     options.headerTitle !== undefined
@@ -19,15 +16,16 @@ const Header: React.FC<IHeader> = ({ scene, previous, navigation }) => {
       : scene.route.name;
 
   return (
-    <Appbar.Header>
-      {/* <Appbar.Header theme={{ colors: { primary: theme.colors.surface } }}> */}
+    <Appbar.Header theme={{ colors: { primary: theme.colors.background } }}>
+      {/* // <Appbar.Header> */}
       {previous ? (
         <Appbar.BackAction
-          onPress={navigation.pop}
+          onPress={() => navigation.pop()}
           // color={theme.colors.primary}
         />
       ) : (
         <Appbar.Action
+          // @ts-ignore
           onPress={() => navigation.openDrawer()}
           icon="menu"
         ></Appbar.Action>
@@ -48,7 +46,11 @@ const Header: React.FC<IHeader> = ({ scene, previous, navigation }) => {
       )}
       <Appbar.Content
         title={
-          previous ? title : <MaterialCommunityIcons name="twitter" size={40} />
+          previous ? (
+            title
+          ) : (
+            <MaterialCommunityIcons name="hackernews" size={40} />
+          )
         }
       />
     </Appbar.Header>

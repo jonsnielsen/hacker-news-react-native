@@ -47,9 +47,7 @@ export default function App() {
         }}
       >
         <PaperProvider theme={isLightTheme ? lightTheme : darkTheme}>
-          <NavigationContainer>
-            <Navigator />
-          </NavigationContainer>
+          <Navigator />
         </PaperProvider>
       </ToggleThemeContext.Provider>
       {/* </ThemeProvider> */}

@@ -49,7 +49,7 @@ const NewsStory: React.FC<IProps> = ({
     .rgb()
     .string();
   return (
-    <View style={styles.topRow}>
+    <View style={[styles.topRow, { backgroundColor: theme.colors.background }]}>
       <Text>{simplifiedUrl}</Text>
       <Title>{title}</Title>
       <Caption style={styles.handle}>{authorId}</Caption>

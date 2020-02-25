@@ -2,21 +2,21 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { HomeScreen, NewsStoryScreen } from "../screens";
-import { Header } from "../components/layout";
+import Header from "./header";
+import { useTheme, Appbar } from "react-native-paper";
 
 const Stack = createStackNavigator();
 
 interface IProps {}
 
 const StackNavigator: React.FC<IProps> = () => {
+  const theme = useTheme();
   return (
     <Stack.Navigator
       initialRouteName="Feed"
       headerMode="screen"
       screenOptions={{
-        header: ({ scene, previous, navigation }) => (
-          <Header scene={scene} previous={previous} navigation={navigation} />
-        )
+        header: headerProps => <Header {...headerProps} />
       }}
     >
       <Stack.Screen

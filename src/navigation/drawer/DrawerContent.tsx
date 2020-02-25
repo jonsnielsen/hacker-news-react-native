@@ -3,6 +3,7 @@ import { View, StyleSheet } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItem,
+  DrawerContentComponentProps,
   DrawerNavigationProp
 } from "@react-navigation/drawer";
 import {
@@ -18,29 +19,36 @@ import {
   Switch
 } from "react-native-paper";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { useToggleTheme } from "../../theme/ToggleTheme";
 
-interface IProps {
+interface IProps extends DrawerContentComponentProps<DrawerNavigationProp> {
   // navigation: DrawerNavigationProp<{}>;
 }
 // @ts-ignore
-const DrawerContent: React.FC<IProps> = ({ navigation }) => {
+const DrawerContent: React.FC<IProps> = props => {
+  const { navigation } = props;
+  const theme = useTheme();
+  const { isLightTheme, toggleTheme } = useToggleTheme();
   return (
-    <DrawerContentScrollView>
-      <View style={styles.drawerContent}>
-        {/* <View style={styles.userInfoSection}> */}
-        {/* <Avatar.Image
-            source={{
-              uri:
-                "https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg"
-            }}
-            size={50}
-          /> */}
-        {/* <Button onPress={() => {}} icon="backburger" /> */}
+    <DrawerContentScrollView
+      style={{
+        backgroundColor: theme.colors.surface
+      }}
+      {...props}
+    >
+      <View
+        style={[
+          styles.drawerContent,
+          {
+            backgroundColor: theme.colors.surface
+          }
+        ]}
+      >
         <DrawerItem
           icon={({ color, size }) => (
             <MaterialCommunityIcons
               name="menu-open"
-              color={color}
+              color={theme.colors.text}
               size={size}
             />
           )}
@@ -52,7 +60,7 @@ const DrawerContent: React.FC<IProps> = ({ navigation }) => {
           }}
         />
         {/* </View> */}
-        <Drawer.Section style={styles.drawerSection}>
+        {/* <Drawer.Section style={styles.drawerSection}>
           <DrawerItem
             icon={({ color, size }) => (
               <MaterialCommunityIcons name="tune" color={color} size={size} />
@@ -71,24 +79,16 @@ const DrawerContent: React.FC<IProps> = ({ navigation }) => {
             label="Bookmarks"
             onPress={() => {}}
           />
-        </Drawer.Section>
-        <Drawer.Section title="Preferences">
-          <TouchableRipple onPress={() => {}}>
-            <View style={styles.preference}>
-              <Text>Dark Theme</Text>
-              <View pointerEvents="none">
-                <Switch value={false} />
-              </View>
-            </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={() => {}}>
-            <View style={styles.preference}>
-              <Text>RTL</Text>
-              <View pointerEvents="none">
-                <Switch value={false} />
-              </View>
-            </View>
-          </TouchableRipple>
+        </Drawer.Section> */}
+        <Drawer.Section style={styles.drawerSection} title="Preferences">
+          <View style={styles.preference}>
+            <Text>Dark Theme</Text>
+            <Switch onValueChange={toggleTheme} value={!isLightTheme} />
+          </View>
+          <View style={styles.preference}>
+            <Text>RTL</Text>
+            <Switch value={false} />
+          </View>
         </Drawer.Section>
       </View>
     </DrawerContentScrollView>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, View, StyleSheet } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../store";
@@ -7,10 +7,16 @@ import {
   NewsStoriesState,
   NewsStoriesActionTypes
 } from "../../store/news-stories/types";
-import { ActivityIndicator, Title, Text, Switch } from "react-native-paper";
+import {
+  ActivityIndicator,
+  Title,
+  Text,
+  Switch,
+  useTheme
+} from "react-native-paper";
 import NewsStory from "./news-story";
 // import Layout from "../../components/layout";
-import { useToggleTheme } from "../../theme/ToggleTheme";
+
 import { StackNavigatorParamlist } from "../../types/NavigationTypes";
 
 interface IProps {
@@ -19,23 +25,15 @@ interface IProps {
 
 const HomeScreen: React.FC<IProps> = ({ navigation }) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
   const { newsStories, loading, error } = useSelector<
     AppState,
     NewsStoriesState
   >((state: AppState) => state.hackerNews);
-  const { isLightTheme, toggleTheme } = useToggleTheme();
 
   useEffect(() => {
     dispatch({ type: NewsStoriesActionTypes.LOAD_TOP_TEN_REQUEST });
   }, []);
-
-  if (loading) {
-    return <ActivityIndicator animating={true} />;
-  }
-
-  if (error) {
-    return <Text>An Error has ocurred!</Text>;
-  }
 
   const data = newsStories.map(newsStory => ({
     newsStory,
@@ -44,18 +42,29 @@ const HomeScreen: React.FC<IProps> = ({ navigation }) => {
     }
   }));
   return (
-    <View>
-      {/* <STitle>Hacker News</STitle> */}
-      <Title>Hacker News</Title>
-      <Switch onValueChange={toggleTheme} value={!isLightTheme} />
-      <FlatList
-        data={data}
-        keyExtractor={item => item.newsStory.author.id.toString()}
-        renderItem={({ item }) => <NewsStory {...item} />}
-      />
+    <View style={[styles.wrapper, { backgroundColor: theme.colors.surface }]}>
+      {loading ? (
+        <ActivityIndicator animating={true} />
+      ) : error ? (
+        <Text>An Error has ocurred!</Text>
+      ) : (
+        <FlatList
+          data={data}
+          contentContainerStyle={{ backgroundColor: theme.colors.background }}
+          // style={{ backgroundColor: theme.colors.background }}
+          keyExtractor={item => item.newsStory.author.id.toString()}
+          renderItem={({ item }) => <NewsStory {...item} />}
+        />
+      )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1
+  }
+});
 
 // const STitle = styled.Text`
 //   ${({ theme }) => `

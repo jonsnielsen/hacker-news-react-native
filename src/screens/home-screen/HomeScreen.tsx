@@ -41,6 +41,7 @@ const HomeScreen: React.FC<IProps> = ({ navigation }) => {
       navigation?.push("NewsStory", newsStory);
     }
   }));
+
   return (
     <View style={[styles.wrapper, { backgroundColor: theme.colors.surface }]}>
       {loading ? (
@@ -52,8 +53,11 @@ const HomeScreen: React.FC<IProps> = ({ navigation }) => {
           data={data}
           contentContainerStyle={{ backgroundColor: theme.colors.background }}
           // style={{ backgroundColor: theme.colors.background }}
-          keyExtractor={item => item.newsStory.author.id.toString()}
+          keyExtractor={item => item.newsStory.id.toString()}
           renderItem={({ item }) => <NewsStory {...item} />}
+          ItemSeparatorComponent={() => (
+            <View style={{ height: StyleSheet.hairlineWidth }} />
+          )}
         />
       )}
     </View>

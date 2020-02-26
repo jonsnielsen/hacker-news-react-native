@@ -16,6 +16,7 @@ import {
   TouchableRipple
 } from "react-native-paper";
 import color from "color";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface IProps {
   newsStory: INewsStory;
@@ -49,11 +50,45 @@ const NewsStory: React.FC<IProps> = ({
     .rgb()
     .string();
   return (
-    <View style={[styles.topRow, { backgroundColor: theme.colors.background }]}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <Text>{simplifiedUrl}</Text>
       <Title>{title}</Title>
-      <Caption style={styles.handle}>{authorId}</Caption>
-      <Caption style={[styles.handle, styles.dot]}>{"\u2B24"}</Caption>
+      <View style={styles.bottomRow}>
+        <View style={styles.iconContainer}>
+          <MaterialCommunityIcons
+            size={18}
+            name="star-outline"
+            color={iconColor}
+          />
+          <Caption style={styles.iconDescription}>{score}</Caption>
+        </View>
+        <Text>by: {authorId}</Text>
+        <View style={styles.iconContainer}>
+          <MaterialCommunityIcons
+            size={18}
+            name="cards-heart"
+            color={iconColor}
+          />
+          <Caption style={styles.iconDescription}>{karma}</Caption>
+        </View>
+
+        {/* <IconValuePair icon={<FontAwesome name="star" />} value={score} />
+    //     <SAuthor>by: {authorId}</SAuthor>
+    //     <IconValuePair icon={<FontAwesome name="heart" />} value={karma} /> */}
+
+        {/* <View style={styles.iconContainer}>
+                <MaterialCommunityIcons
+                  name="comment-outline"
+                  size={12}
+                  color={iconColor}
+                />
+                <Caption style={styles.iconDescription}>
+                  {props.comments}
+                </Caption>
+              </View */}
+      </View>
     </View>
     // <SContainer>
     //   <TouchableWithoutFeedback onPress={onPress}>
@@ -101,9 +136,9 @@ const NewsStory: React.FC<IProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
     paddingTop: 15,
-    paddingRight: 15
+    paddingVertical: 15,
+    paddingHorizontal: 20
   },
   leftColumn: {
     width: 100,
@@ -112,15 +147,12 @@ const styles = StyleSheet.create({
   rightColumn: {
     flex: 1
   },
-  topRow: {
+  bottomRow: {
     flexDirection: "row",
-    alignItems: "baseline"
+    alignItems: "center"
   },
   handle: {
     marginRight: 3
-  },
-  dot: {
-    fontSize: 3
   },
   image: {
     borderWidth: StyleSheet.hairlineWidth,
@@ -129,12 +161,12 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 150
   },
-  bottomRow: {
-    paddingVertical: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
+  // bottomRow: {
+  //   paddingVertical: 10,
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   justifyContent: "space-between"
+  // },
   iconContainer: {
     flexDirection: "row",
     alignItems: "center"

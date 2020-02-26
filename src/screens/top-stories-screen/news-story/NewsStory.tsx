@@ -19,13 +19,13 @@ import color from "color";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface IProps {
-  newsStory: IStory;
+  story: IStory;
   onPress(): void;
 }
 
 const NewsStory: React.FC<IProps> = ({
   onPress,
-  newsStory: {
+  story: {
     url,
     simplifiedUrl,
     title,

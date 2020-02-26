@@ -2,20 +2,20 @@ import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { useTheme, Portal, FAB } from "react-native-paper";
 import { RouteProp } from "@react-navigation/native";
-import color from 'color'
+import color from "color";
 // import overlay from './overlay';
-import { NewsStoryScreen, QuestionsScreen, JobsScreen } from "../screens";
+import { TopStoriesScreen, QuestionsScreen, JobsScreen } from "../screens";
 // import { Message } from './message';
 // import { Notifications } from './notifications';
 import { StackNavigatorParamlist } from "../types/NavigationTypes";
 
 const Tab = createMaterialBottomTabNavigator();
 
-interface IBottomTabs {
+interface ITabNavigator {
   route: RouteProp<StackNavigatorParamlist, "FeedList">;
 }
 
-const BottomTabs: React.FC<IBottomTabs> = ({ route }) => {
+const TabNavigator: React.FC<ITabNavigator> = ({ route }) => {
   const theme = useTheme();
 
   // const tabBarColor = theme.dark
@@ -37,7 +37,7 @@ const BottomTabs: React.FC<IBottomTabs> = ({ route }) => {
       >
         <Tab.Screen
           name="Feed"
-          component={NewsStoryScreen}
+          component={TopStoriesScreen}
           options={{
             tabBarIcon: "home"
             // tabBarColor
@@ -46,21 +46,22 @@ const BottomTabs: React.FC<IBottomTabs> = ({ route }) => {
         <Tab.Screen
           name="Questions"
           component={QuestionsScreen}
-          options={{
-            tabBarIcon: "head-question"
-            // tabBarColor
-          }}
+          // options={{
+          //   tabBarIcon: "head-question"
+          //   // tabBarColor
+          // }}
         />
         <Tab.Screen
           name="Jobs"
           component={JobsScreen}
-          options={{
-            tabBarIcon: "post"
-            // tabBarColor
-          }}
+          // options={{
+          //   tabBarIcon: "post"
+          //   // tabBarColor
+          // }}
         />
       </Tab.Navigator>
-
     </React.Fragment>
   );
 };
+
+export default TabNavigator;

@@ -26,19 +26,18 @@ interface IProps {
 const NewsStoryScreen: React.FC<IProps> = ({ navigation }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
-  const { newsStories, loading, error } = useSelector<
-    AppState,
-    StoriesState
-  >((state: AppState) => state.hackerNews);
+  const { stories, loading, error } = useSelector<AppState, StoriesState>(
+    (state: AppState) => state.hackerNews
+  );
 
   useEffect(() => {
     dispatch({ type: TopNewsStoriesActionTypes.LOAD_STORY_REQUEST });
   }, []);
 
-  const data = newsStories.map(story => ({
+  const data = stories.map(story => ({
     story,
     onPress: () => {
-      navigation.navigate("StoryItem", { story });
+      navigation.navigate("StoryItem", story);
     }
   }));
 
@@ -49,17 +48,17 @@ const NewsStoryScreen: React.FC<IProps> = ({ navigation }) => {
       ) : error ? (
         <Text>An Error has ocurred!</Text>
       ) : (
-            <FlatList
-              data={data}
-              contentContainerStyle={{ backgroundColor: theme.colors.background }}
-              // style={{ backgroundColor: theme.colors.background }}
-              keyExtractor={item => item.newsStory.id.toString()}
-              renderItem={({ item }) => <NewsStory {...item} />}
-              ItemSeparatorComponent={() => (
-                <View style={{ height: StyleSheet.hairlineWidth }} />
-              )}
-            />
+        <FlatList
+          data={data}
+          contentContainerStyle={{ backgroundColor: theme.colors.background }}
+          // style={{ backgroundColor: theme.colors.background }}
+          keyExtractor={item => item.news.id.toString()}
+          renderItem={({ item }) => <NewsStory {...item} />}
+          ItemSeparatorComponent={() => (
+            <View style={{ height: StyleSheet.hairlineWidth }} />
           )}
+        />
+      )}
     </View>
   );
 };

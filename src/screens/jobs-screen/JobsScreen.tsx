@@ -1,10 +1,11 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { Text } from "react-native-paper";
 
 interface IProps {}
 
 const MessageScreen: React.FC<IProps> = () => {
-  return <View>message</View>;
+  return <Text>message</Text>;
 };
 
 const styles = StyleSheet.create({});

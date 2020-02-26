@@ -23,7 +23,7 @@ interface IProps {
   navigation?: StackNavigationProp<StackNavigatorParamlist>;
 }
 
-const NewsStoryScreen: React.FC<IProps> = ({ navigation }) => {
+const TopStoriesScreen: React.FC<IProps> = ({ navigation }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
   const { stories, loading, error } = useSelector<AppState, StoriesState>(
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
 //   margin-vertical: 30px;
 // `;
 
-export default NewsStoryScreen;
+export default TopStoriesScreen;

@@ -1,17 +1,12 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { RouteProp } from "@react-navigation/native";
-import { IStory } from "../../types/Story";
-import { StackNavigatorParamlist } from "../../types/NavigationTypes";
+import { Text } from "react-native-paper";
 
-interface IProps {
-  route: RouteProp<StackNavigatorParamlist, "NewsStory">;
-}
-
-const NewsStoryScreen: React.FC<IProps> = ({ route }) => {
-  return <View>New notification</View>;
+interface IQuestionsScreen {}
+const QuestionsScreen: React.FC<IQuestionsScreen> = () => {
+  return <Text>New notification</Text>;
 };
 
 const styles = StyleSheet.create({});
 
-export default NewsStoryScreen;
+export default QuestionsScreen;

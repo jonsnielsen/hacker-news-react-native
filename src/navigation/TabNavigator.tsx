@@ -39,25 +39,28 @@ const TabNavigator: React.FC<ITabNavigator> = ({ route }) => {
           name="Feed"
           component={TopStoriesScreen}
           options={{
-            tabBarIcon: "home"
-            // tabBarColor
+            tabBarIcon: "home",
+            tabBarColor: theme.colors.background
           }}
         />
         <Tab.Screen
           name="Questions"
           component={QuestionsScreen}
-          // options={{
-          //   tabBarIcon: "head-question"
-          //   // tabBarColor
-          // }}
+          options={{
+            tabBarIcon: "home",
+            tabBarColor: theme.colors.background
+            // tabBarIcon: "head-question"
+            // tabBarColor
+          }}
         />
         <Tab.Screen
           name="Jobs"
           component={JobsScreen}
-          // options={{
-          //   tabBarIcon: "post"
-          //   // tabBarColor
-          // }}
+          options={{
+            // tabBarIcon: "post"
+            tabBarIcon: "home",
+            tabBarColor: theme.colors.background
+          }}
         />
       </Tab.Navigator>
     </React.Fragment>

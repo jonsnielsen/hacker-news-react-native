@@ -4,9 +4,9 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../store";
 import {
-  NewsStoriesState,
-  NewsStoriesActionTypes
-} from "../../store/news-stories/types";
+  StoriesState,
+  TopNewsStoriesActionTypes
+} from "../../store/stories/stories.types";
 import {
   ActivityIndicator,
   Title,
@@ -28,11 +28,11 @@ const NewsStoryScreen: React.FC<IProps> = ({ navigation }) => {
   const theme = useTheme();
   const { newsStories, loading, error } = useSelector<
     AppState,
-    NewsStoriesState
+    StoriesState
   >((state: AppState) => state.hackerNews);
 
   useEffect(() => {
-    dispatch({ type: NewsStoriesActionTypes.LOAD_TOP_TEN_REQUEST });
+    dispatch({ type: TopNewsStoriesActionTypes.LOAD_STORY_REQUEST });
   }, []);
 
   const data = newsStories.map(story => ({

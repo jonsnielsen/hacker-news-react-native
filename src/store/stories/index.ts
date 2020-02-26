@@ -1,24 +1,24 @@
 import { Reducer } from "redux";
-import { NewsStoriesActionTypes, NewsStoriesState } from "./types";
+import { TopNewsStoriesActionTypes, StoriesState } from "./stories.types";
 
-export const initialState: NewsStoriesState = {
-  newsStories: [],
+export const initialState: StoriesState = {
+  stories: [],
   error: false,
   loading: false
 };
 
-const reducer: Reducer<NewsStoriesState> = (state = initialState, action) => {
+const reducer: Reducer<StoriesState> = (state = initialState, action) => {
   switch (action.type) {
-    case NewsStoriesActionTypes.LOAD_TOP_TEN_REQUEST:
+    case TopNewsStoriesActionTypes.LOAD_STORY_REQUEST:
       return { ...state, loading: true };
-    case NewsStoriesActionTypes.LOAD_TOP_TEN_SUCCESS:
+    case TopNewsStoriesActionTypes.LOAD_STORY_SUCCESS:
       return {
         ...state,
         newsStories: action.payload,
         loading: false,
         error: false
       };
-    case NewsStoriesActionTypes.LOAD_TOP_TEN_FAILURE:
+    case TopNewsStoriesActionTypes.LOAD_STORY_FAILURE:
       return { ...state, loading: false, error: true };
     default:
       return state;

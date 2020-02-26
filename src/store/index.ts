@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
-import reducer from "./news-stories";
-import { NewsStoriesActionTypes } from "./news-stories/types";
-import { fetchTopTenStories } from "./news-stories/sagas";
+import reducer from "./stories";
+import { TopNewsStoriesActionTypes, JobStoriesActionTypes, QuestionStoriesActionTypes } from "./stories/stories.types";
+import { fetchTopNewsStories, fetchJobStories, fetchQuestionStories } from "./stories/stories.sagas";
 import { all, takeLatest } from "redux-saga/effects";
+import { fetchQuestionStoriesIds } from "../API/stories.api";
 
 export const rootReducer = combineReducers({
   hackerNews: reducer
@@ -10,9 +11,11 @@ export const rootReducer = combineReducers({
 
 export function* rootSaga() {
   return yield all([
-    takeLatest(NewsStoriesActionTypes.LOAD_TOP_TEN_REQUEST, fetchTopTenStories)
+    takeLatest(TopNewsStoriesActionTypes.LOAD_STORY_REQUEST, fetchTopNewsStories),
+    takeLatest(JobStoriesActionTypes.LOAD_JOB_STORIES_REQUEST, fetchJobStories),
+    takeLatest(QuestionStoriesActionTypes.LOAD_QUESTION_STORIES_REQUEST, fetchQuestionStories)
   ]);
 }
 
-export type AppActions = NewsStoriesActionTypes;
+export type AppActions = TopNewsStoriesActionTypes;
 export type AppState = ReturnType<typeof rootReducer>;

@@ -24,8 +24,9 @@ const StackNavigator: React.FC<IProps> = () => {
         name="Feed"
         component={TabNavigator}
         options={({ route }) => {
-          const routeName = route.state?.routes[route.state.index].name || 'Top Stories'
-          return { headerTitle: routeName }
+          const headerTitle = route.state?.routes[route.state.index].name || 'Top Stories'
+          return { headerTitle }
+          // headerTitleStyle: {textAlign:'center', alignSelf:'center',flex:1}  https://github.com/react-navigation/react-navigation/issues/253
         }}
       />
 

@@ -35,10 +35,10 @@ const NewsStoryScreen: React.FC<IProps> = ({ navigation }) => {
     dispatch({ type: NewsStoriesActionTypes.LOAD_TOP_TEN_REQUEST });
   }, []);
 
-  const data = newsStories.map(newsStory => ({
-    newsStory,
+  const data = newsStories.map(story => ({
+    story,
     onPress: () => {
-      navigation.navigate("StoryItem", newsStory);
+      navigation.navigate("StoryItem", { story });
     }
   }));
 
@@ -49,17 +49,17 @@ const NewsStoryScreen: React.FC<IProps> = ({ navigation }) => {
       ) : error ? (
         <Text>An Error has ocurred!</Text>
       ) : (
-        <FlatList
-          data={data}
-          contentContainerStyle={{ backgroundColor: theme.colors.background }}
-          // style={{ backgroundColor: theme.colors.background }}
-          keyExtractor={item => item.newsStory.id.toString()}
-          renderItem={({ item }) => <NewsStory {...item} />}
-          ItemSeparatorComponent={() => (
-            <View style={{ height: StyleSheet.hairlineWidth }} />
+            <FlatList
+              data={data}
+              contentContainerStyle={{ backgroundColor: theme.colors.background }}
+              // style={{ backgroundColor: theme.colors.background }}
+              keyExtractor={item => item.newsStory.id.toString()}
+              renderItem={({ item }) => <NewsStory {...item} />}
+              ItemSeparatorComponent={() => (
+                <View style={{ height: StyleSheet.hairlineWidth }} />
+              )}
+            />
           )}
-        />
-      )}
     </View>
   );
 };

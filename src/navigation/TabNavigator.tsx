@@ -1,8 +1,7 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { useTheme, Portal, FAB } from "react-native-paper";
-import { useSafeArea } from "react-native-safe-area-context";
-import { useIsFocused, RouteProp } from "../screens/top-stories-screen/node_modules/@react-navigation/native";
+import { RouteProp } from "@react-navigation/native";
 import color from 'color'
 // import overlay from './overlay';
 import { NewsStoryScreen, QuestionsScreen, JobsScreen } from "../screens";
@@ -17,14 +16,7 @@ interface IBottomTabs {
 }
 
 const BottomTabs: React.FC<IBottomTabs> = ({ route }) => {
-  // const routeName = route.state
-  //   ? route.state.routes[route.state.index].name
-  //   : "Feed";
-
-  const routeName = route.state?.routes[route.state.index].name || "Feed"
   const theme = useTheme();
-  const safeArea = useSafeArea();
-  const isFocused = useIsFocused();
 
   // const tabBarColor = theme.dark
   //   ? (overlay(6, theme.colors.surface) as string)

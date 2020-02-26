@@ -2,8 +2,10 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigatorParamlist } from "../../types/NavigationTypes";
+import { IStory } from "../../types/Story";
 
 interface IProps {
+  story: IStory;
   route: RouteProp<StackNavigatorParamlist, "StoryItem">;
 }
 

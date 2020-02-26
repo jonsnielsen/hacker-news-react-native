@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { RouteProp } from "../top-stories-screen/node_modules/@react-navigation/native";
+import { RouteProp } from "@react-navigation/native";
 import { IStory } from "../../types/Story";
 import { StackNavigatorParamlist } from "../../types/NavigationTypes";
 

@@ -14,7 +14,7 @@ const reducer: Reducer<StoriesState> = (state = initialState, action) => {
     case TopNewsStoriesActionTypes.LOAD_STORY_SUCCESS:
       return {
         ...state,
-        newsStories: action.payload,
+        stories: action.payload,
         loading: false,
         error: false
       };

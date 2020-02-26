@@ -52,7 +52,7 @@ const NewsStoryScreen: React.FC<IProps> = ({ navigation }) => {
           data={data}
           contentContainerStyle={{ backgroundColor: theme.colors.background }}
           // style={{ backgroundColor: theme.colors.background }}
-          keyExtractor={item => item.news.id.toString()}
+          keyExtractor={item => item.story.id.toString()}
           renderItem={({ item }) => <NewsStory {...item} />}
           ItemSeparatorComponent={() => (
             <View style={{ height: StyleSheet.hairlineWidth }} />

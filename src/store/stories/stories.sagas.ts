@@ -17,28 +17,10 @@ import { simplifyUrl } from "../../utils/text";
 
 export function* fetchTopNewsStories() {
   try {
-    console.log("in fetch top");
     const topNewsStoriesIds = yield* call(fetchTopNewsStoriesIds);
-    console.log("top stores ids");
-    console.log(topNewsStoriesIds);
-    // const tenRandomIds = _.sampleSize(topNewsStoriesIds, 10);
-    // const topNewsStoriesDTOs = yield* all(
-    //   topNewsStoriesIds.map(id => call(fetchStory, { id }))
-    // );
-    // const topTenNewsStories = yield* all(
-    //   topNewsStoriesDTOs.map(dto =>
-    //     fetchAuthor({ id: dto.by }).then(
-    //       (author): IStory => ({
-    //         ...dto,
-    //         simplifiedUrl: simplifyUrl(dto.url),
-    //         author
-    //       })
-    //     )
-    //   )
-    // );
-    const topTenNewsStories = _fetchStoriesFromIds(topNewsStoriesIds);
-    console.log("toptennewsstories");
-    yield put(loadTopNewsStoriesSuccess(topTenNewsStories));
+    const ids = topNewsStoriesIds.slice(0, 15);
+    const topNewsStories = yield _fetchStoriesFromIds(ids);
+    yield put(loadTopNewsStoriesSuccess(topNewsStories));
   } catch (err) {
     console.log("error");
     console.log(err);
@@ -49,22 +31,7 @@ export function* fetchTopNewsStories() {
 export function* fetchJobStories() {
   try {
     const jobStoriesIds = yield* call(fetchJobStoriesIds);
-    // // const tenRandomIds = _.sampleSize(topNewsStoriesIds, 10);
-    // const topStoriesDTOs = yield* all(
-    //   jobStoriesIds.map(id => call(fetchStory, { id }))
-    // );
-    // const jobStories = yield* all(
-    //   topStoriesDTOs.map(dto =>
-    //     fetchAuthor({ id: dto.by }).then(
-    //       (author): IStory => ({
-    //         ...dto,
-    //         simplifiedUrl: simplifyUrl(dto.url),
-    //         author
-    //       })
-    //     )
-    //   )
-    // );
-    const jobStories = _fetchStoriesFromIds(jobStoriesIds);
+    const jobStories = yield _fetchStoriesFromIds(jobStoriesIds);
     yield put(loadTopNewsStoriesSuccess(jobStories));
   } catch (err) {
     console.log("error");
@@ -76,22 +43,7 @@ export function* fetchJobStories() {
 export function* fetchQuestionStories() {
   try {
     const questionStoriesIds = yield* call(fetchJobStoriesIds);
-    // // const tenRandomIds = _.sampleSize(topNewsStoriesIds, 10);
-    // const questionStoriesDTOs = yield* all(
-    //   questionStoriesIds.map(id => call(fetchStory, { id }))
-    // );
-    // const questionStories = yield* all(
-    //   questionStoriesDTOs.map(dto =>
-    //     fetchAuthor({ id: dto.by }).then(
-    //       (author): IStory => ({
-    //         ...dto,
-    //         simplifiedUrl: simplifyUrl(dto.url),
-    //         author
-    //       })
-    //     )
-    //   )
-    // );
-    const questionStories = _fetchStoriesFromIds(questionStoriesIds);
+    const questionStories = yield _fetchStoriesFromIds(questionStoriesIds);
     yield put(loadTopNewsStoriesSuccess(questionStories));
   } catch (err) {
     console.log("error");
@@ -114,4 +66,21 @@ function* _fetchStoriesFromIds(ids: number[]) {
     )
   );
   return stories;
+
+  // const tenRandomIds = _.sampleSize(topNewsStoriesIds, 10);
+  // const topNewsStoriesDTOs = yield* all(
+  //   topNewsStoriesIds.map(id => call(fetchStory, { id }))
+  // );
+  // const topTenNewsStories = yield* all(
+  //   topNewsStoriesDTOs.map(dto =>
+  //     fetchAuthor({ id: dto.by }).then(
+  //       (author): IStory => ({
+  //         ...dto,
+  //         simplifiedUrl: simplifyUrl(dto.url),
+  //         author
+  //       })
+  //     )
+  //   )
+  // );
+  // return stories;
 }

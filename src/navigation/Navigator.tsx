@@ -1,5 +1,4 @@
 import React from "react";
-import { HomeScreen } from "../screens";
 import DrawerContent from "./drawer";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";

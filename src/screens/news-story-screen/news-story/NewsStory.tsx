@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import IconValuePair from "../../../components/IconValuePair";
 import { FontAwesome } from "@expo/vector-icons";
-import { INewsStory } from "../../../types/NewsStory";
+import { IStory } from "../../../types/Story";
 import {
   Title,
   Caption,
@@ -19,7 +19,7 @@ import color from "color";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface IProps {
-  newsStory: INewsStory;
+  newsStory: IStory;
   onPress(): void;
 }
 

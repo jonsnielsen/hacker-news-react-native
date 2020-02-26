@@ -5,7 +5,7 @@ import { useSafeArea } from "react-native-safe-area-context";
 import { useIsFocused, RouteProp } from "@react-navigation/native";
 
 // import overlay from './overlay';
-import { HomeScreen, NotificationsScreen, MessageScreen } from "../screens";
+import { NewsStoryScreen, NotificationsScreen, MessageScreen } from "../screens";
 // import { Message } from './message';
 // import { Notifications } from './notifications';
 import { StackNavigatorParamlist } from "../types/NavigationTypes";
@@ -56,7 +56,7 @@ const BottomTabs: React.FC<IProps> = ({ route }) => {
       >
         <Tab.Screen
           name="Feed"
-          component={HomeScreen}
+          component={NewsStoryScreen}
           options={{
             tabBarIcon: "home-account"
             // tabBarColor

@@ -1,10 +1,10 @@
 import { NewsStoriesActionTypes } from "./types";
 import { action } from "typesafe-actions";
-import { INewsStory } from "../../types/NewsStory";
+import { IStory } from "../../types/Story";
 
 export const loadTopTenRequest = () =>
   action(NewsStoriesActionTypes.LOAD_TOP_TEN_REQUEST);
-export const loadTopTenSuccess = (newsStories: INewsStory[]) => {
+export const loadTopTenSuccess = (newsStories: IStory[]) => {
   return action(NewsStoriesActionTypes.LOAD_TOP_TEN_SUCCESS, newsStories);
 };
 export const loadTopTenFailure = () =>

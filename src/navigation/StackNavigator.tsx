@@ -1,13 +1,13 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { HomeScreen, NewsStoryScreen } from "../screens";
+import { NewsStoryScreen, StoryItemScreen } from "../screens";
 import Header from "./header";
 import { useTheme, Appbar } from "react-native-paper";
 
 const Stack = createStackNavigator();
 
-interface IProps {}
+interface IProps { }
 
 const StackNavigator: React.FC<IProps> = () => {
   const theme = useTheme();
@@ -21,13 +21,13 @@ const StackNavigator: React.FC<IProps> = () => {
     >
       <Stack.Screen
         name="Feed"
-        component={HomeScreen}
-        // options={{ headerTitle: "HackerNews " }}
+        component={NewsStoryScreen}
+      // options={{ headerTitle: "HackerNews " }}
       />
       <Stack.Screen
         name="News Story"
-        component={NewsStoryScreen}
-        options={{ headerTitle: "News Story" }}
+        component={StoryItemScreen}
+        options={{ headerTitle: "Story Item Story" }}
       />
     </Stack.Navigator>
   );

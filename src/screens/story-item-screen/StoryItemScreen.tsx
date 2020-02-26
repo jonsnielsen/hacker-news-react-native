@@ -1,15 +1,14 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { RouteProp } from "@react-navigation/native";
-import { IStory } from "../../types/Story";
 import { StackNavigatorParamlist } from "../../types/NavigationTypes";
 
 interface IProps {
-  route: RouteProp<StackNavigatorParamlist, "NewsStory">;
+  route: RouteProp<StackNavigatorParamlist, "StoryItem">;
 }
 
 const NewsStoryScreen: React.FC<IProps> = ({ route }) => {
-  return <View>New notification</View>;
+  return <View>Story Item Screen</View>;
 };
 
 const styles = StyleSheet.create({});

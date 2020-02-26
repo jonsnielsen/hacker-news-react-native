@@ -1,5 +1,5 @@
-import { INewsStory } from "./NewsStory";
+import { IStory } from "./Story";
 export type StackNavigatorParamlist = {
   FeedList: undefined;
-  NewsStory: INewsStory;
+  NewsStory: IStory;
 };

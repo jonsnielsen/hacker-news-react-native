@@ -38,7 +38,7 @@ const NewsStoryScreen: React.FC<IProps> = ({ navigation }) => {
   const data = newsStories.map(newsStory => ({
     newsStory,
     onPress: () => {
-      navigation?.push("NewsStory", newsStory);
+      navigation.navigate("StoryItem", newsStory);
     }
   }));
 

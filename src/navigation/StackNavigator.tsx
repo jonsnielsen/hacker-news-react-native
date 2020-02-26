@@ -3,6 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NewsStoryScreen, StoryItemScreen } from "../screens";
 import Header from "./header";
+import TabNavigator from './TabNavigator'
 import { useTheme, Appbar } from "react-native-paper";
 
 const Stack = createStackNavigator();
@@ -21,13 +22,30 @@ const StackNavigator: React.FC<IProps> = () => {
     >
       <Stack.Screen
         name="Feed"
-        component={NewsStoryScreen}
-      // options={{ headerTitle: "HackerNews " }}
+        component={TabNavigator}
+        options={({ route }) => {
+          const routeName = route.state?.routes[route.state.index].name || 'Top Stories'
+          return { headerTitle: routeName }
+        }}
       />
+
+      {/* <Stack.Screen
+        name="FeedList"
+        component={BottomTabs}
+        options={({ route }) => {
+          console.log('!@# options', { route });
+          const routeName = route.state
+            ? route.state.routes[route.state.index].name
+            : 'Feed';
+          return { headerTitle: routeName };
+        }}
+      /> */}
+
+
       <Stack.Screen
-        name="News Story"
+        name="StoryItem"
         component={StoryItemScreen}
-        options={{ headerTitle: "Story Item Story" }}
+        options={{ headerTitle: "Bla" }}
       />
     </Stack.Navigator>
   );

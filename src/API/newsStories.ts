@@ -6,10 +6,10 @@ export const fetchTopNewsStoriesIds = async () => {
   return response.data;
 };
 
-interface IFetchNewsStory {
+interface IFetchStory {
   id: number;
 }
-export const fetchNewsStory = async ({ id }: IFetchNewsStory) => {
+export const fetchStory = async ({ id }: IFetchStory) => {
   const response = await API.get<IStoryDTO>(`item/${id}.json`);
   return response.data;
 };

@@ -1,6 +1,6 @@
-import NewsStoryScreen from "./news-story-screen";
+import NewsStoryScreen from "./top-stories-screen";
 import StoryItemScreen from './story-item-screen';
-import NotificationsScreen from "./notifications-screen";
-import MessageScreen from "./message-screen";
+import QuestionsScreen from "./questions-screen";
+import JobsScreen from "./jobs-screen";
 
-export { NewsStoryScreen, StoryItemScreen, NotificationsScreen, MessageScreen };
+export { NewsStoryScreen, StoryItemScreen, QuestionsScreen, JobsScreen };

@@ -8,6 +8,7 @@ interface IProps {
 }
 
 const NewsStoryScreen: React.FC<IProps> = ({ route }) => {
+  // const {} = route.params
   return <View>Story Item Screen</View>;
 };
 

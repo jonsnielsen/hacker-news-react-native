@@ -1,10 +1,9 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StoryItemScreen } from "../screens";
 import Header from "./header";
 import TabNavigator from "./TabNavigator";
-import { useTheme, Appbar } from "react-native-paper";
+import { useTheme } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
@@ -37,33 +36,20 @@ const StackNavigator: React.FC<IProps> = () => {
                 color={theme.colors.primary}
               />
             );
-
           return { headerTitle };
-          // headerTitleStyle: {textAlign:'center', alignSelf:'center',flex:1}  https://github.com/react-navigation/react-navigation/issues/253
         }}
       />
-
-      {/* <Stack.Screen
-        name="FeedList"
-        component={BottomTabs}
-        options={({ route }) => {
-          console.log('!@# options', { route });
-          const routeName = route.state
-            ? route.state.routes[route.state.index].name
-            : 'Feed';
-          return { headerTitle: routeName };
-        }}
-      /> */}
 
       <Stack.Screen
         name="StoryItem"
         component={StoryItemScreen}
-        options={{ headerTitle: "Bla" }}
+        options={({ route }) => {
+          // @ts-ignore
+          return { headerTitle: route.params.headerTitle };
+        }}
       />
     </Stack.Navigator>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default StackNavigator;

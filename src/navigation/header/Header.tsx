@@ -1,7 +1,5 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
-import { Appbar, Avatar, Button, useTheme } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Appbar, useTheme } from "react-native-paper";
 import { StackHeaderProps } from "@react-navigation/stack";
 
 interface IHeader extends StackHeaderProps {}
@@ -17,12 +15,8 @@ const Header: React.FC<IHeader> = ({ scene, previous, navigation }) => {
 
   return (
     <Appbar.Header theme={{ colors: { primary: theme.colors.background } }}>
-      {/* // <Appbar.Header> */}
       {previous ? (
-        <Appbar.BackAction
-          onPress={() => navigation.pop()}
-          // color={theme.colors.primary}
-        />
+        <Appbar.BackAction onPress={() => navigation.pop()} />
       ) : (
         <Appbar.Action
           // @ts-ignore
@@ -34,6 +28,7 @@ const Header: React.FC<IHeader> = ({ scene, previous, navigation }) => {
         title={title}
         titleStyle={{
           fontSize: 18,
+          marginRight: 10,
           fontWeight: "bold",
           color: theme.colors.primary
         }}

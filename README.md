@@ -1,6 +1,10 @@
 # Hacker news app made with React Native
+
 ## Technologies used
-* React Native (Expo)
-* TypeScript
-* Redux + Saga
-* Styled Components
+
+- React Native (Expo)
+- TypeScript
+- Redux + Saga
+- Styled Components
+
+<img src="./assets/video.mov" />

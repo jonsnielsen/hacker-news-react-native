@@ -10,7 +10,11 @@ import { fetchAuthor } from "../../API/authors.api";
 import { IStory } from "../../types/Story";
 import {
   loadTopNewsStoriesSuccess,
-  loadTopNewsStoriesFailure
+  loadTopNewsStoriesFailure,
+  loadJobsSuccess,
+  loadJobsFailure,
+  loadQuestionsSuccess,
+  loadQuestionsFailure
 } from "./stories.actions";
 import _ from "lodash";
 import { simplifyUrl } from "../../utils/text";
@@ -31,24 +35,26 @@ export function* fetchTopNewsStories() {
 export function* fetchJobStories() {
   try {
     const jobStoriesIds = yield* call(fetchJobStoriesIds);
-    const jobStories = yield _fetchStoriesFromIds(jobStoriesIds);
-    yield put(loadTopNewsStoriesSuccess(jobStories));
+    const ids = jobStoriesIds.slice(0, 15);
+    const jobStories = yield _fetchStoriesFromIds(ids);
+    yield put(loadJobsSuccess(jobStories));
   } catch (err) {
     console.log("error");
     console.log(err);
-    yield put(loadTopNewsStoriesFailure());
+    yield put(loadJobsFailure());
   }
 }
 
 export function* fetchQuestionStories() {
   try {
-    const questionStoriesIds = yield* call(fetchJobStoriesIds);
-    const questionStories = yield _fetchStoriesFromIds(questionStoriesIds);
-    yield put(loadTopNewsStoriesSuccess(questionStories));
+    const questionStoriesIds = yield* call(fetchQuestionStoriesIds);
+    const ids = questionStoriesIds.slice(0, 15);
+    const questionStories = yield _fetchStoriesFromIds(ids);
+    yield put(loadQuestionsSuccess(questionStories));
   } catch (err) {
     console.log("error");
     console.log(err);
-    yield put(loadTopNewsStoriesFailure());
+    yield put(loadQuestionsFailure());
   }
 }
 
@@ -66,21 +72,4 @@ function* _fetchStoriesFromIds(ids: number[]) {
     )
   );
   return stories;
-
-  // const tenRandomIds = _.sampleSize(topNewsStoriesIds, 10);
-  // const topNewsStoriesDTOs = yield* all(
-  //   topNewsStoriesIds.map(id => call(fetchStory, { id }))
-  // );
-  // const topTenNewsStories = yield* all(
-  //   topNewsStoriesDTOs.map(dto =>
-  //     fetchAuthor({ id: dto.by }).then(
-  //       (author): IStory => ({
-  //         ...dto,
-  //         simplifiedUrl: simplifyUrl(dto.url),
-  //         author
-  //       })
-  //     )
-  //   )
-  // );
-  // return stories;
 }

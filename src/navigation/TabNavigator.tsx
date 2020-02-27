@@ -1,12 +1,9 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import { useTheme, Portal, FAB } from "react-native-paper";
+import { useTheme } from "react-native-paper";
 import { RouteProp } from "@react-navigation/native";
 import color from "color";
-// import overlay from './overlay';
 import { TopStoriesScreen, QuestionsScreen, JobsScreen } from "../screens";
-// import { Message } from './message';
-// import { Notifications } from './notifications';
 import { StackNavigatorParamlist } from "../types/NavigationTypes";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -18,14 +15,10 @@ interface ITabNavigator {
 const TabNavigator: React.FC<ITabNavigator> = ({ route }) => {
   const theme = useTheme();
 
-  // const tabBarColor = theme.dark
-  //   ? (overlay(6, theme.colors.surface) as string)
-  //   : theme.colors.surface;
-
   return (
     <React.Fragment>
       <Tab.Navigator
-        initialRouteName="Feed"
+        initialRouteName="News"
         backBehavior="initialRoute"
         shifting={true}
         activeColor={theme.colors.primary}
@@ -36,7 +29,7 @@ const TabNavigator: React.FC<ITabNavigator> = ({ route }) => {
         sceneAnimationEnabled={false}
       >
         <Tab.Screen
-          name="Feed"
+          name="News"
           component={TopStoriesScreen}
           options={{
             tabBarIcon: "home",
@@ -47,18 +40,15 @@ const TabNavigator: React.FC<ITabNavigator> = ({ route }) => {
           name="Questions"
           component={QuestionsScreen}
           options={{
-            tabBarIcon: "home",
+            tabBarIcon: "account-question",
             tabBarColor: theme.colors.background
-            // tabBarIcon: "head-question"
-            // tabBarColor
           }}
         />
         <Tab.Screen
           name="Jobs"
           component={JobsScreen}
           options={{
-            // tabBarIcon: "post"
-            tabBarIcon: "home",
+            tabBarIcon: "coffee",
             tabBarColor: theme.colors.background
           }}
         />

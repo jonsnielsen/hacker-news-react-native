@@ -6,20 +6,9 @@ import {
   DrawerContentComponentProps,
   DrawerNavigationProp
 } from "@react-navigation/drawer";
-import {
-  useTheme,
-  Button,
-  Avatar,
-  Title,
-  Caption,
-  Paragraph,
-  Drawer,
-  Text,
-  TouchableRipple,
-  Switch
-} from "react-native-paper";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import { useToggleTheme } from "../theme/ToggleTheme";
+import { useTheme, Drawer, Text, Switch } from "react-native-paper";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useToggleTheme } from "../theme/ToggleThemeContent";
 
 interface IProps
   extends DrawerContentComponentProps<DrawerNavigationProp<any>> {}
@@ -31,18 +20,11 @@ const DrawerContent: React.FC<IProps> = props => {
   return (
     <DrawerContentScrollView
       style={{
-        backgroundColor: theme.colors.surface
+        backgroundColor: theme.colors.background
       }}
       {...props}
     >
-      <View
-        style={[
-          styles.drawerContent,
-          {
-            backgroundColor: theme.colors.surface
-          }
-        ]}
-      >
+      <View style={[styles.drawerContent]}>
         <DrawerItem
           icon={({ color, size }) => (
             <MaterialCommunityIcons
@@ -66,10 +48,6 @@ const DrawerContent: React.FC<IProps> = props => {
               value={!isLightTheme}
             />
           </View>
-          <View style={styles.preference}>
-            <Text>RTL</Text>
-            <Switch value={false} />
-          </View>
         </Drawer.Section>
       </View>
     </DrawerContentScrollView>
@@ -77,36 +55,15 @@ const DrawerContent: React.FC<IProps> = props => {
 };
 
 const styles = StyleSheet.create({
-  drawerContent: {
-    flex: 1
-  },
-  userInfoSection: {
-    paddingLeft: 20
-  },
   title: {
     marginTop: 20,
     fontWeight: "bold"
   },
-  caption: {
-    fontSize: 14,
-    lineHeight: 14
-  },
-  row: {
-    marginTop: 20,
-    flexDirection: "row",
-    alignItems: "center"
-  },
-  section: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginRight: 15
-  },
-  paragraph: {
-    fontWeight: "bold",
-    marginRight: 3
-  },
   drawerSection: {
     marginTop: 15
+  },
+  drawerContent: {
+    flex: 1
   },
   preference: {
     flexDirection: "row",

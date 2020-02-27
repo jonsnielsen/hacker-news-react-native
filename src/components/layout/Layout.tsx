@@ -7,14 +7,19 @@ interface IProps {}
 const Layout: React.FC<IProps> = ({ children }) => {
   const theme = useTheme();
   return (
-    <View style={[styles.wrapper, { backgroundColor: theme.colors.surface }]}>
+    <View
+      style={[
+        styles.contentWrapper,
+        { backgroundColor: theme.colors.background }
+      ]}
+    >
       {children}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
+  contentWrapper: {
     flex: 1,
     paddingTop: 15,
     paddingVertical: 15,

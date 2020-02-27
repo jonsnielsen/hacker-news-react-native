@@ -20,5 +20,3 @@ const RootNavigator = () => {
   );
 };
 export default RootNavigator;
-
-// export default createAppContainer(AppNavigator);

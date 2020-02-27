@@ -5,7 +5,7 @@ import {
   Linking,
   TouchableWithoutFeedback
 } from "react-native";
-import IconValuePair from "../IconCaption";
+import IconValuePair from "../icon-caption";
 import { FontAwesome } from "@expo/vector-icons";
 import { IStory } from "../../types/Story";
 import {
@@ -17,8 +17,8 @@ import {
 } from "react-native-paper";
 import color from "color";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { contentColor, fadedColor } from "../../theme/theme";
-import IconCaption from "../IconCaption";
+import { useCustomTheme } from "../../theme";
+import IconCaption from "../icon-caption";
 import * as WebBrowser from "expo-web-browser";
 
 interface IProps {
@@ -28,16 +28,14 @@ interface IProps {
 
 const NewsStory: React.FC<IProps> = ({
   onPress,
-  story: {
-    url,
-    simplifiedUrl,
-    title,
-    author: { karma, id: authorId },
-    score
-  }
+  story: { url, simplifiedUrl, title, author, score }
 }) => {
   const theme = useTheme();
+  const { contentColor, fadedColor } = useCustomTheme();
 
+  // const { karma, id: authorId } = author;
+  const karma = author?.karma;
+  const authorId = author?.id;
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.wrapper}>

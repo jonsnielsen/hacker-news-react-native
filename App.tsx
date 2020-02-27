@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider as ReduxProvider } from "react-redux";
 import { rootReducer, rootSaga } from "./src/store";
 import createSagaMiddleware from "redux-saga";
-import { ToggleThemeContext } from "./src/theme/ToggleTheme";
+import { ToggleThemeContext } from "./src/theme/ToggleThemeContent";
 import { Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 

@@ -1,32 +1,32 @@
 import { combineReducers } from "redux";
-import reducer from "./stories";
-import {
-  TopNewsStoriesActionTypes,
-  JobStoriesActionTypes,
-  QuestionStoriesActionTypes
-} from "./stories/stories.types";
+import storiesReducer from "./stories";
+import commentsReducer from "./comments";
+import { StoriesActionTypes } from "./stories/stories.types";
+import { CommentsActionTypes } from "./comments/comments.types";
 import {
   fetchTopNewsStories,
   fetchJobStories,
   fetchQuestionStories
 } from "./stories/stories.sagas";
-import { all, takeLatest } from "redux-saga/effects";
-import { fetchQuestionStoriesIds } from "../API/stories.api";
+import { fetchComments } from "./comments/comments.sagas";
+import { all, takeLatest, takeEvery } from "redux-saga/effects";
 
 export const rootReducer = combineReducers({
-  hackerNews: reducer
+  hackerNews: storiesReducer,
+  comments: commentsReducer
 });
 
 export function* rootSaga() {
   return yield all([
+    takeLatest(StoriesActionTypes.LOAD_NEWS_STORY_REQUEST, fetchTopNewsStories),
+    takeLatest(StoriesActionTypes.LOAD_JOB_STORIES_REQUEST, fetchJobStories),
     takeLatest(
-      TopNewsStoriesActionTypes.LOAD_STORY_REQUEST,
-      fetchTopNewsStories
-    )
-    // takeLatest(JobStoriesActionTypes.LOAD_JOB_STORIES_REQUEST, fetchJobStories),
-    // takeLatest(QuestionStoriesActionTypes.LOAD_QUESTION_STORIES_REQUEST, fetchQuestionStories)
+      StoriesActionTypes.LOAD_QUESTION_STORIES_REQUEST,
+      fetchQuestionStories
+    ),
+    takeEvery(CommentsActionTypes.LOAD_COMMENTS_REQUEST, fetchComments)
   ]);
 }
 
-export type AppActions = TopNewsStoriesActionTypes;
+export type AppActions = StoriesActionTypes;
 export type AppState = ReturnType<typeof rootReducer>;

@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, View, StyleSheet } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../store";
 import {
   StoriesState,
-  TopNewsStoriesActionTypes
+  StoriesActionTypes
 } from "../../store/stories/stories.types";
 import {
   ActivityIndicator,
@@ -18,33 +18,45 @@ import StoryItem from "../../components/story-item";
 import Layout from "../../components/layout";
 
 import { StackNavigatorParamlist } from "../../types/NavigationTypes";
+import { IStory } from "../../types/Story";
 
 interface IProps {
   navigation?: StackNavigationProp<StackNavigatorParamlist>;
 }
 
 const TopStoriesScreen: React.FC<IProps> = ({ navigation }) => {
+  // const [stories, setStories] = useState<IStory[]>([]);
   const dispatch = useDispatch();
   const theme = useTheme();
-  const { stories, loading, error } = useSelector<AppState, StoriesState>(
+  const { newsStories, loading, error } = useSelector<AppState, StoriesState>(
     (state: AppState) => state.hackerNews
   );
 
   useEffect(() => {
-    dispatch({ type: TopNewsStoriesActionTypes.LOAD_STORY_REQUEST });
+    dispatch({ type: StoriesActionTypes.LOAD_NEWS_STORY_REQUEST });
   }, []);
 
-  const data = stories.map(story => ({
+  // useEffect(() => {
+  //   if (!loading && storiesFromRedux.length) {
+  //     setStories(storiesFromRedux);
+  //   }
+  // }, [loading]);
+  console.log("re-render");
+  console.log("-----------e-render");
+
+  const data = newsStories.map(story => ({
     story,
     onPress: () => {
-      navigation.navigate("StoryItem", { story });
+      navigation.navigate("StoryItem", { story, headerTitle: "News" });
     }
   }));
 
   return (
     <Layout>
       {loading ? (
-        <ActivityIndicator animating={true} />
+        <View style={styles.activityIndicatorWrapper}>
+          <ActivityIndicator animating={true} />
+        </View>
       ) : error ? (
         <Text>An Error has ocurred!</Text>
       ) : (
@@ -66,6 +78,11 @@ const TopStoriesScreen: React.FC<IProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1
+  },
+  activityIndicatorWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 

@@ -19,12 +19,11 @@ import {
   Switch
 } from "react-native-paper";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import { useToggleTheme } from "../../theme/ToggleTheme";
+import { useToggleTheme } from "../theme/ToggleTheme";
 
-interface IProps extends DrawerContentComponentProps<DrawerNavigationProp> {
-  // navigation: DrawerNavigationProp<{}>;
-}
-// @ts-ignore
+interface IProps
+  extends DrawerContentComponentProps<DrawerNavigationProp<any>> {}
+
 const DrawerContent: React.FC<IProps> = props => {
   const { navigation } = props;
   const theme = useTheme();
@@ -53,37 +52,19 @@ const DrawerContent: React.FC<IProps> = props => {
             />
           )}
           label=""
-          // icon="backburger"
-          // label="Preferences"
           onPress={() => {
+            // @ts-ignore
             navigation.closeDrawer();
           }}
         />
-        {/* </View> */}
-        {/* <Drawer.Section style={styles.drawerSection}>
-          <DrawerItem
-            icon={({ color, size }) => (
-              <MaterialCommunityIcons name="tune" color={color} size={size} />
-            )}
-            label="Preferences"
-            onPress={() => {}}
-          />
-          <DrawerItem
-            icon={({ color, size }) => (
-              <MaterialCommunityIcons
-                name="bookmark-outline"
-                color={color}
-                size={size}
-              />
-            )}
-            label="Bookmarks"
-            onPress={() => {}}
-          />
-        </Drawer.Section> */}
         <Drawer.Section style={styles.drawerSection} title="Preferences">
           <View style={styles.preference}>
             <Text>Dark Theme</Text>
-            <Switch onValueChange={toggleTheme} value={!isLightTheme} />
+            <Switch
+              color={theme.colors.primary}
+              onValueChange={toggleTheme}
+              value={!isLightTheme}
+            />
           </View>
           <View style={styles.preference}>
             <Text>RTL</Text>

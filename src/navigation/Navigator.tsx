@@ -1,5 +1,5 @@
 import React from "react";
-import DrawerContent from "./drawer";
+import DrawerContent from "./DrawerContent";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNavigator from "./StackNavigator";

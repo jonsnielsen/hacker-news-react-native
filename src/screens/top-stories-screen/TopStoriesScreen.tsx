@@ -14,8 +14,8 @@ import {
   Switch,
   useTheme
 } from "react-native-paper";
-import NewsStory from "./news-story";
-// import Layout from "../../components/layout";
+import StoryItem from "../../components/story-item";
+import Layout from "../../components/layout";
 
 import { StackNavigatorParamlist } from "../../types/NavigationTypes";
 
@@ -37,12 +37,12 @@ const TopStoriesScreen: React.FC<IProps> = ({ navigation }) => {
   const data = stories.map(story => ({
     story,
     onPress: () => {
-      navigation.navigate("StoryItem", story);
+      navigation.navigate("StoryItem", { story });
     }
   }));
 
   return (
-    <View style={[styles.wrapper, { backgroundColor: theme.colors.surface }]}>
+    <Layout>
       {loading ? (
         <ActivityIndicator animating={true} />
       ) : error ? (
@@ -53,13 +53,13 @@ const TopStoriesScreen: React.FC<IProps> = ({ navigation }) => {
           contentContainerStyle={{ backgroundColor: theme.colors.background }}
           // style={{ backgroundColor: theme.colors.background }}
           keyExtractor={item => item.story.id.toString()}
-          renderItem={({ item }) => <NewsStory {...item} />}
+          renderItem={({ item }) => <StoryItem {...item} />}
           ItemSeparatorComponent={() => (
             <View style={{ height: StyleSheet.hairlineWidth }} />
           )}
         />
       )}
-    </View>
+    </Layout>
   );
 };
 

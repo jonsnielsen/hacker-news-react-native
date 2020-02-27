@@ -7,4 +7,4 @@
 - Redux + Saga
 - Styled Components
 
-<img style="width: 50%;" src="./assets/video.gif" />
+<img src="./assets/video.gif" />

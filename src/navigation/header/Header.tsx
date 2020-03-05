@@ -28,11 +28,18 @@ const Header: React.FC<IHeader> = ({ scene, previous, navigation }) => {
         title={title}
         titleStyle={{
           fontSize: 18,
-          marginRight: 10,
+          marginRight: 8,
           fontWeight: "bold",
+          alignSelf: "center",
           color: theme.colors.primary
         }}
       />
+      {/* Total hack to get title to be centered on android */}
+      {previous ? (
+        <Appbar.BackAction style={{ opacity: 0 }} />
+      ) : (
+        <Appbar.Action style={{ opacity: 0 }} icon="menu"></Appbar.Action>
+      )}
     </Appbar.Header>
   );
 };

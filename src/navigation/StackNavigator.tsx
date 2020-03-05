@@ -1,4 +1,5 @@
 import React from "react";
+import { View, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StoryItemScreen } from "../screens";
 import Header from "./header";
@@ -17,7 +18,13 @@ const StackNavigator: React.FC<IProps> = () => {
       initialRouteName="Feed"
       headerMode="screen"
       screenOptions={{
-        header: headerProps => <Header {...headerProps} />
+        header: headerProps => <Header {...headerProps} />,
+        // headerLeft: headerProps => <Header {...headerProps} />,
+        headerRight: () => (
+          <View>
+            <Text>hello</Text>
+          </View>
+        )
       }}
     >
       <Stack.Screen
@@ -27,7 +34,7 @@ const StackNavigator: React.FC<IProps> = () => {
           // @ts-ignore
           let headerTitle = route.state?.routes[route.state.index].name;
           headerTitle =
-            headerTitle && headerTitle !== "Feed" ? (
+            headerTitle && headerTitle !== "News" ? (
               headerTitle
             ) : (
               <MaterialCommunityIcons
